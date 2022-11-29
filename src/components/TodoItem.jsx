@@ -1,11 +1,11 @@
 import React from 'react'
 import CrossIcon from './icons/CrossIcon'
 
-const TodoItem = () => {
+const TodoItem = ({todo}) => {
   return (
     <article className="flex gap-4 py-4 border-b-gray-400 border-b px-4">
                 <button className="rounded-full border-2 w-5 h-5 inline-block flex-none"></button>
-                <p className="text-gray-600 grow">Complete online javaScript curses</p>
+                <p className="text-gray-600 grow">{todo.title}</p>
                 <button className="flex-none"><CrossIcon /> </button>
     </article>
   )
