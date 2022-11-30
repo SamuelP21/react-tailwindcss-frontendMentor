@@ -37,8 +37,29 @@ const updateTodo = (id) => {
     (todo) => todo.id === id ? {...todo, completed: !todo.completed } : todo)) // :todo es caso contrario devitele el todo ya que no coinside con el todo
 }
 
+const removeCompleted = () => {
+  setTodos(todos.filter((todo) => !todo.completed));
+}
+
+const [filter, setFilter] = useState("all");
+
+const filterTodo = () => {
+  switch(filter){
+    case "all":
+      return todos;
+    case "active":
+      return todos.filter((todo) => !todo.completed);
+    case "completed":
+      return todos.filter((todo) => todo.completed);
+    default:
+      return todos;
+  }
+}
+
+const computedItemsLeft = todos.filter((todo) => !todo.completed).length
+
   return (
-    <div className="bg-[url('src/assets/images/bg-mobile-light.jpg')] bg-contain bg-no-repeat bg-gray-300 min-h-screen">
+    <div className="bg-[url('src/assets/images/bg-mobile-light.jpg')] bg-contain bg-no-repeat bg-gray-300 min-h-screen dark:bg-gray-900">
       {/* Header */}
      <Header />
       <main className="container mx-auto px-4 mt-8">
@@ -47,12 +68,12 @@ const updateTodo = (id) => {
           <TodoCreate createTodo={createTodo} />
 
         {/*TodoList (TodoItem) TodoUpdate TodoDelete */}
-        <TodoList todos={todos} updateTodo={updateTodo} removeTodo={removeTodo}/>
+        <TodoList todos={filterTodo()} updateTodo={updateTodo} removeTodo={removeTodo}/>
         {/* TodoComputed */}
-       <TodoComputed />
+       <TodoComputed computedItemsLeft={computedItemsLeft} removeCompleted={removeCompleted} />
 
         {/*TodoFilter */}
-        <TodoFilter />
+        <TodoFilter setFilter={setFilter} filter={filter} />
       </main>
 
       
@@ -60,7 +81,7 @@ const updateTodo = (id) => {
 
       
 
-      <footer className="text-center mt-8">Drag and drop to reader list</footer>
+      <footer className="text-center mt-8 dark:text-gray-400">Drag and drop to reader list</footer>
     </div>
   )
 }

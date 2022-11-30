@@ -1,13 +1,13 @@
 import React from 'react'
 
-const TodoFilter = () => {
+const TodoFilter = ({filter, setFilter}) => {
   return (
-    <section className="container mx-auto  mt-8">
+    <section className="container mx-auto  mt-8 ">
 
-          <div className="bg-white p-4 rounded-md flex justify-center gap-4">
-              <button className="text-blue-600">All</button>
-              <button className="hover:text-blue-600">Active</button>
-              <button className="hover:text-blue-600">Completed</button>
+          <div className="bg-white p-4 rounded-md flex justify-center gap-4 dark:bg-gray-800">
+              <button onClick={() => setFilter("all")} className={`${filter === "all" ? "text-blue-600 hover:text-gray-400" : "text-gray-400 hover:text-blue-600" }`}>All</button>
+              <button onClick={() => setFilter("active")} className={`${filter === "active" ? "text-blue-600 hover:text-gray-400" : "text-gray-400 hover:text-blue-600" }`}>Active</button>
+              <button onClick={() => setFilter("completed")} className={`${filter === "completed" ? "text-blue-600 hover:text-gray-400" : "text-gray-400 hover:text-blue-600" }`}>Completed</button>
           </div>
           
     </section>
