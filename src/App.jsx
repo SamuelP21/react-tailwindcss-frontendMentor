@@ -1,3 +1,5 @@
+import './utils/darkMode' // configurar si el usuario tiene la configuracion en modo oscuro y poder modificarlo 
+
 
 import { useState } from "react"
 import Header from "./components/Header"
@@ -59,7 +61,7 @@ const filterTodo = () => {
 const computedItemsLeft = todos.filter((todo) => !todo.completed).length
 
   return (
-    <div className="bg-[url('src/assets/images/bg-mobile-light.jpg')] bg-contain bg-no-repeat bg-gray-300 min-h-screen dark:bg-gray-900">
+    <div className="bg-[url('src/assets/images/bg-mobile-light.jpg')] bg-contain bg-no-repeat bg-gray-300 min-h-screen dark:bg-gray-900 dark:bg-[url('src/assets/images/bg-mobile-dark.jpg')]">
       {/* Header */}
      <Header />
       <main className="container mx-auto px-4 mt-8">

@@ -5,4 +5,5 @@ module.exports = {
     extend: {},
   },
   plugins: [],
+  darkMode: 'class', // con esto obtenemos preferencia del usuario de si quiere darkMode o no, y se coloca en index.html
 }
