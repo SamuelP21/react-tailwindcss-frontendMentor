@@ -1,12 +1,25 @@
 import React from 'react'
+import CheckIcon from './icons/CheckIcon'
 import CrossIcon from './icons/CrossIcon'
 
-const TodoItem = ({todo}) => {
+const TodoItem = ({todo, updateTodo, removeTodo}) => {
+
+  const {id, title, completed} = todo;
+
   return (
     <article className="flex gap-4 py-4 border-b-gray-400 border-b px-4">
-                <button className="rounded-full border-2 w-5 h-5 inline-block flex-none"></button>
-                <p className="text-gray-600 grow">{todo.title}</p>
-                <button className="flex-none"><CrossIcon /> </button>
+             
+                <button onClick={() => updateTodo(id)} className={`rounded-full border-2 w-5 h-5 flex-none ${completed 
+                  ? "bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 flex justify-center items-center" 
+                  : "inline-block"}`}>
+                  {
+                    completed && <CheckIcon /> //si la tarea esta completed devuelve el icono
+                  }
+                  
+                </button>
+                <p className={`grow ${completed ? "text-gray-300 line-through"
+                  : "text-gray-600"}`}>{title}</p>
+                <button onClick={() => removeTodo(id)} className="flex-none"><CrossIcon /> </button>
     </article>
   )
 }
