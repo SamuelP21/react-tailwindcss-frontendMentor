@@ -70,7 +70,7 @@ useEffect(() => { // estaremos pendiente de los todos para actualizar el localSt
 const computedItemsLeft = todos.filter((todo) => !todo.completed).length
 
   return (
-    <div className="transition-all duration-1000  md:bg-[url('./assets/images/bg-desktop-light.jpg')]  bg-[url('src/assets/images/bg-mobile-light.jpg')] bg-contain bg-no-repeat bg-gray-300 min-h-screen dark:bg-gray-900 dark:bg-[url('src/assets/images/bg-mobile-dark.jpg')] md:dark:bg-[url('src/assets/images/bg-desktop-dark.jpg')]">
+    <div className="transition-all duration-1000  md:bg-[url('./assets/images/bg-desktop-light.jpg')]  bg-[url('./assets/images/bg-mobile-light.jpg')] bg-contain bg-no-repeat bg-gray-300 min-h-screen dark:bg-gray-900 dark:bg-[url('./assets/images/bg-mobile-dark.jpg')] md:dark:bg-[url('./assets/images/bg-desktop-dark.jpg')]">
       {/* Header */}
      <Header />
       <main className="container mx-auto px-4 mt-8 md:max-w-xl">
@@ -90,7 +90,7 @@ const computedItemsLeft = todos.filter((todo) => !todo.completed).length
       
 
 
-      <img src={deskL} alt="" />
+      
 
       <footer className="text-center mt-8 dark:text-gray-400">Drag and drop to reader list</footer>
     </div>
