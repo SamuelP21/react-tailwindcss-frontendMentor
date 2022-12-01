@@ -1,21 +1,23 @@
 import './utils/darkMode' // configurar si el usuario tiene la configuracion en modo oscuro y poder modificarlo 
 
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Header from "./components/Header"
 import TodoComputed from "./components/TodoComputed"
 import TodoCreate from "./components/TodoCreate"
 import TodoFilter from "./components/TodoFilter"
 import TodoList from "./components/TodoList"
 
-const initialStateTodos = [
+/*const initialStateTodos = [
   { id: 1, title: "Complete online JavaScript course", completed: true,},
   { id: 2, title: "Jog around the park 3x", completed: false,},
   { id: 3, title: "10 minutes meditation", completed: false,},
   { id: 4, title: "Read for 1 hours", completed: false,},
   { id: 5, title: "Pick up groceries", completed: false,},
   { id: 6, title: "Complete Todo App n Frontend Mentor", completed: false,},
-]
+]*/
+
+const initialStateTodos = JSON.parse(localStorage.getItem("todos")) || [] // vemos si tienen guardado en localStorage todos los obtengo y lo traducimos  del formato json sino tiene nada un array de basio
 
 function App() {
   
@@ -58,13 +60,19 @@ const filterTodo = () => {
   }
 }
 
+useEffect(() => { // estaremos pendiente de los todos para actualizar el localStorage
+
+  localStorage.setItem("todos", JSON.stringify(todos)); // convertimos los todos  a json string
+
+}, [todos]);
+
 const computedItemsLeft = todos.filter((todo) => !todo.completed).length
 
   return (
-    <div className="bg-[url('src/assets/images/bg-mobile-light.jpg')] bg-contain bg-no-repeat bg-gray-300 min-h-screen dark:bg-gray-900 dark:bg-[url('src/assets/images/bg-mobile-dark.jpg')]">
+    <div className="transition-all duration-1000  md:bg-[url('src/assets/images/bg-desktop-light.jpg')]  bg-[url('src/assets/images/bg-mobile-light.jpg')] bg-contain bg-no-repeat bg-gray-300 min-h-screen dark:bg-gray-900 dark:bg-[url('src/assets/images/bg-mobile-dark.jpg')] md:dark:bg-[url('src/assets/images/bg-desktop-dark.jpg')]">
       {/* Header */}
      <Header />
-      <main className="container mx-auto px-4 mt-8">
+      <main className="container mx-auto px-4 mt-8 md:max-w-xl">
 
           {/*TodoCreate */}
           <TodoCreate createTodo={createTodo} />
