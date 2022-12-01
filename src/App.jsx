@@ -1,5 +1,6 @@
 import './utils/darkMode' // configurar si el usuario tiene la configuracion en modo oscuro y poder modificarlo 
 
+import deskL from './assets/images/bg-desktop-light.jpg'
 
 import { useEffect, useState } from "react"
 import Header from "./components/Header"
@@ -89,7 +90,7 @@ const computedItemsLeft = todos.filter((todo) => !todo.completed).length
       
 
 
-      
+      <img src={deskL} alt="" />
 
       <footer className="text-center mt-8 dark:text-gray-400">Drag and drop to reader list</footer>
     </div>
