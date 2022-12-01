@@ -81,10 +81,11 @@ const computedItemsLeft = todos.filter((todo) => !todo.completed).length
         {/*TodoList (TodoItem) TodoUpdate TodoDelete */}
         <TodoList todos={filterTodo()} updateTodo={updateTodo} removeTodo={removeTodo}/>
         {/* TodoComputed */}
-       <TodoComputed computedItemsLeft={computedItemsLeft} removeCompleted={removeCompleted} />
+       <TodoComputed computedItemsLeft={computedItemsLeft} removeCompleted={removeCompleted} setFilter={setFilter} filter={filter} />
 
         {/*TodoFilter */}
-        <TodoFilter setFilter={setFilter} filter={filter} />
+        <div className="md:hidden container mx-auto  mt-8 "><TodoFilter setFilter={setFilter} filter={filter} /></div>
+        
       </main>
 
       
@@ -92,7 +93,7 @@ const computedItemsLeft = todos.filter((todo) => !todo.completed).length
 
       
 
-      <footer className="text-center mt-8 dark:text-gray-400">Drag and drop to reader list</footer>
+      <footer className="text-center mt-8 dark:text-gray-400 ">Drag and drop to reader list</footer>
     </div>
   )
 }
