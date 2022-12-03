@@ -1,6 +1,7 @@
 import './utils/darkMode' // configurar si el usuario tiene la configuracion en modo oscuro y poder modificarlo 
 
-import deskL from './assets/images/bg-desktop-light.jpg'
+import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
+
 
 import { useEffect, useState } from "react"
 import Header from "./components/Header"
@@ -18,7 +19,23 @@ import TodoList from "./components/TodoList"
   { id: 6, title: "Complete Todo App n Frontend Mentor", completed: false,},
 ]*/
 
-const initialStateTodos = JSON.parse(localStorage.getItem("todos")) || [] // vemos si tienen guardado en localStorage todos los obtengo y lo traducimos  del formato json sino tiene nada un array de basio
+const initialStateTodos = JSON.parse(localStorage.getItem("todos")) || [
+  { id: 1, title: "Complete online JavaScript course", completed: true,},
+  { id: 2, title: "Jog around the park 3x", completed: false,},
+  { id: 3, title: "10 minutes meditation", completed: false,},
+  { id: 4, title: "Read for 1 hours", completed: false,},
+  { id: 5, title: "Pick up groceries", completed: false,},
+  { id: 6, title: "Complete Todo App n Frontend Mentor", completed: false,},
+] // vemos si tienen guardado en localStorage todos los obtengo y lo traducimos  del formato json sino tiene nada un array de basio
+
+// se coloca fuera del app para que cuando se renderice la pagina no se tenga que crear una y otra vez
+const reorder = (list, startIndex, endIndex) => {
+  const result = [...list];
+  const [removed] = result.splice(startIndex, 1);
+  result.splice(endIndex, 0, removed);
+
+  return result;
+};
 
 function App() {
   
@@ -69,6 +86,20 @@ useEffect(() => { // estaremos pendiente de los todos para actualizar el localSt
 
 const computedItemsLeft = todos.filter((todo) => !todo.completed).length
 
+const handleDragEnd = (result) => {
+  const { destination, source } = result;// se crea una costante que agarra el destination que es a donde ira. y source donde empezo
+  if (!destination) return; //salimos si es null el destination
+  if (
+      source.index === destination.index &&       // si se mantiene igual en la misma posicion  que retorne para no hacer la operacion
+      source.droppableId === destination.droppableId
+  )
+      return;
+
+  setTodos((prevTasks) => // aqui lo mandamos a ordenar 
+      reorder(prevTasks, source.index, destination.index)
+  );
+};
+
   return (
     <div className="transition-all duration-1000  md:bg-[url('./assets/images/bg-desktop-light.jpg')]  bg-[url('./assets/images/bg-mobile-light.jpg')] bg-contain bg-no-repeat bg-gray-300 min-h-screen dark:bg-gray-900 dark:bg-[url('./assets/images/bg-mobile-dark.jpg')] md:dark:bg-[url('./assets/images/bg-desktop-dark.jpg')]">
       {/* Header */}
@@ -79,7 +110,13 @@ const computedItemsLeft = todos.filter((todo) => !todo.completed).length
           <TodoCreate createTodo={createTodo} />
 
         {/*TodoList (TodoItem) TodoUpdate TodoDelete */}
-        <TodoList todos={filterTodo()} updateTodo={updateTodo} removeTodo={removeTodo}/>
+        <DragDropContext onDragEnd={handleDragEnd}>
+          <TodoList
+             todos={filterTodo()}
+             updateTodo={updateTodo}
+             removeTodo={removeTodo} />
+        </DragDropContext>
+       
         {/* TodoComputed */}
        <TodoComputed computedItemsLeft={computedItemsLeft} removeCompleted={removeCompleted} setFilter={setFilter} filter={filter} />
 
