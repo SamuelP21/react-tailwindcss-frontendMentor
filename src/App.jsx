@@ -1,6 +1,6 @@
 import './utils/darkMode' // configurar si el usuario tiene la configuracion en modo oscuro y poder modificarlo 
 
-import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
+import { DragDropContext} from "@hello-pangea/dnd";
 
 
 import { useEffect, useState } from "react"

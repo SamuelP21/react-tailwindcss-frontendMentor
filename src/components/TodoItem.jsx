@@ -9,7 +9,7 @@ const TodoItem = React.forwardRef(({todo, updateTodo, removeTodo,...props}, ref)
   return (
     <article {...props} ref={ref} className="flex gap-4 py-4 border-b-gray-400 border-b px-4 dark:bg-gray-800">
              
-                <button onClick={() => updateTodo(id)} className={`rounded-full border-2 w-5 h-5 flex-none ${completed 
+                <button onClick={() => updateTodo(id)} className={`rounded-full hover:border-blue-300 border-2 w-5 h-5 flex-none ${completed 
                   ? "bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 flex justify-center items-center" 
                   : "inline-block"}`}>
                   {

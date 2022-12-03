@@ -8,7 +8,7 @@ const TodoComputed = ({computedItemsLeft, removeCompleted, filter, setFilter}) =
         <div className=' md:block sm:hidden muestra container mx-auto '>
           <TodoFilter setFilter={setFilter} filter={filter}  />
         </div>
-        <button onClick={() => removeCompleted()} className="text-gray-400 w-[200px]">Clear  Completed</button>
+        <button onClick={() => removeCompleted()} className="text-gray-400 w-[200px] hover:text-gray-900 dark:hover:text-white">Clear  Completed</button>
     </section>
   )
 }
